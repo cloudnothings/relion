@@ -1,0 +1,74 @@
+// import React, { useEffect } from "react";
+// import { GetStaticProps } from "next";
+// import Layout from "../components/Layout";
+// import Post, { PostProps } from "../components/Post";
+// import prisma from "../lib/prisma";
+// import { useSession } from "next-auth/react";
+// import { useRouter } from "next/router";
+// export const getStaticProps: GetStaticProps = async () => {
+//   const feed = await prisma.post.findMany({
+//     where: { published: true },
+//     include: {
+//       author: {
+//         select: { name: true },
+//       },
+//     },
+//   });
+//   return {
+//     props: { feed },
+//     revalidate: 10,
+//   };
+// };
+
+// type Props = {
+//   feed: PostProps[];
+// };
+
+// const Helpdesk: React.FC<Props> = (props) => {
+//   const { data: session, status } = useSession();
+//   const router = useRouter();
+
+//   useEffect(() => {
+//     if (!session) {
+//       // redirect to the homepage
+//       router.push({
+//         pathname: "/login",
+//       });
+//     }
+//     return () => {};
+//   }, []);
+
+//   if (status === "loading") return <p>Loading</p>;
+
+//   if (session)
+//     return (
+//       <Layout>
+//         <div className="page">
+//           <h1>Public Feed</h1>
+//           <main>
+//             {props.feed.map((post) => (
+//               <div key={post.id} className="post">
+//                 <Post post={post} />
+//               </div>
+//             ))}
+//           </main>
+//         </div>
+//         <style jsx>{`
+//           .post {
+//             background: white;
+//             transition: box-shadow 0.1s ease-in;
+//           }
+
+//           .post:hover {
+//             box-shadow: 1px 1px 3px #aaa;
+//           }
+
+//           .post + .post {
+//             margin-top: 2rem;
+//           }
+//         `}</style>
+//       </Layout>
+//     );
+// };
+
+// export default Helpdesk;
